@@ -9,7 +9,7 @@ import hr1 from "../../assets/hr1.jpg"
 import house1 from "../../assets/apartment1.jpg"
 import house2 from "../../assets/apartment2.jpg";
 
-import "react-awesome-slider/dist/styles.css";
+// import "react-awesome-slider/dist/styles.css";
 import { Link } from "react-router-dom";
 
 

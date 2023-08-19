@@ -2,37 +2,182 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.logo {
+  height: 50px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.productList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+
+  /* grid-template-columns: 1fr 1fr 1fr 1fr;
+  row-gap: 50px;
+  column-gap: 10px;
+  padding: 1rem; */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.productTitle {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  /* width: 300px; */
+}
+
+.productInfor {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.productDetail {
+  display: flex;
+   justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.cartList {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.cartItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center ;
+  width: 700px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.footer {
+  margin-top: 3rem;
+}
+
+.footerIcons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-self: center;
+  gap: 2rem;
+}
+
+
+.landing{
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.landing-item{
+  width: 400px;
+  height: 400px;
+}
+.rental{
+  /* background-image: url(./assets/apartment1.jpg); */
+  background-position: center;
+  background-size: cover;
+}
+.hr{
+   /* background-image: url(./assets/hr1.jpg); */
+  background-position: center;
+  background-size: cover;
+}
+.navbar{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.cardf{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-bottom: 1px solid gray;
+
+}
+.search{
+  background-color:#90CAF9;
+}
+
+.landinbtn{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  
+}
+.footercontact{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+}
+.footercontac{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  background-color: #90CAF9;
+
+}
+
+@media (max-width: 768px){
+  .footercontac{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+  flex-direction: column;
   }
-  to {
-    transform: rotate(360deg);
+  .sort{
+ margin-left: 0px !important;
+
   }
+
+  
+}
+
+.footercontact p{
+  margin: 0;
+  padding: 0;
+}
+.footersub{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.features{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.accordion{
+  width: 90%;
+  
+}
+.accordion-div{
+   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stepper{
+  width: 100%;
+   display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #90CAF9 !important;
 }
