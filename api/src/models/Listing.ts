@@ -2,7 +2,7 @@ import mongoose, { Document } from "mongoose";
 
 export type ListingDocument = Document & {
   title: string;
-  status: boolean;
+  status: string;
   cost: number;
   // interior_space: {
   //   number_of_rooms: number;
@@ -31,7 +31,7 @@ export type ListingDocument = Document & {
 
 const listingsSchema = new mongoose.Schema({
   title: { type: "string" },
-  status: { type: "boolean" },
+  status: { type: "string" },
   cost: { type: "number" },
   // interior_space: {
   //   number_of_rooms: { type: "number" },
