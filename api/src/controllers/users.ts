@@ -48,9 +48,9 @@ export const usersSignup = async (req: Request, res: Response) => {
 
   try {
     const existingUser = await User.findOne({ email });
-    // if (existingUser) {
-    //   return res.status(400).json({ error: "User already exist" });
-    // }
+    if (existingUser) {
+      return res.status(400).json({ error: "User already exist" });
+    }
     const hash = await hashPassword(password);
 
     const user = new User({
@@ -73,7 +73,7 @@ export const usersSignup = async (req: Request, res: Response) => {
       bank_statement: bank_statement[0].path,
       extra_doc: extra_doc[0].path,
     });
-    // await user.save();
+    await user.save();
     console.log(cv);
 
     return res.status(201).json({ message: "User successfully created", user });
