@@ -10,21 +10,6 @@ app.use(Express.json());
 app.use(cors());
 
 app.use("/listings", listingsRouter);
-app.use("/api/users", usersRouter);
-
-// const start = async (): Promise<void> => {
-//   const port = 7000 || process.env.PORT;
-
-//   try {
-//     await connectDB(process.env.MONGO_URI || "");
-//     app.listen(port, () => {
-//       console.log("DB CONNECTED");
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-// start();
+app.use("/users", usersRouter);
 
 export default app;

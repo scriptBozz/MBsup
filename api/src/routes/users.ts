@@ -37,8 +37,7 @@ const router = Router();
 router.post("/signup", multiple, usersSignup);
 router.post("/signin", usersSignin);
 router.patch("/update/:userId", multiple, usersUpdate);
-router.patch("/update/:userId", multiple, usersUpdate);
-router.get("/all-users", allUser);
+router.get("/", allUser);
 router.get("/user-profile/:userId", userProfile);
 
 export default router;

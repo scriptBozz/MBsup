@@ -15,12 +15,6 @@ export const usersSignup = async (req: Request, res: Response) => {
     extra_doc: Express.Multer.File[];
   };
 
-  const files = {
-    cv: cv[0].path,
-    bank_statement: bank_statement[0].path,
-    extra_doc: extra_doc[0].path,
-  };
-
   const {
     name,
     email,
@@ -78,7 +72,6 @@ export const usersSignup = async (req: Request, res: Response) => {
       cv: cv[0].path,
       bank_statement: bank_statement[0].path,
       extra_doc: extra_doc[0].path,
-      files,
     });
     await user.save();
     // console.log(cv);
