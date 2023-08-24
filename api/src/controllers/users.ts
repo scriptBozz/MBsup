@@ -5,15 +5,24 @@ import { v4 as uuidv4 } from "uuid";
 import jwt from "jsonwebtoken";
 
 export const usersSignup = async (req: Request, res: Response) => {
-  // const { cv, bank_statement, extra_doc } = req.files as {
-  //   [fieldname: string]: Express.Multer.File[];
-  // };
+  //   const { cv, bank_statement, extra_doc } = req.files as {
+  //     cv: Express.Multer.File[];
+  //     bank_statement: Express.Multer.File[];
+  //     extra_doc: Express.Multer.File[];
+  //   };
 
-  const { cv, bank_statement, extra_doc } = req.files as {
-    cv: Express.Multer.File[];
-    bank_statement: Express.Multer.File[];
-    extra_doc: Express.Multer.File[];
+  type Files = {
+    cv: string;
+    bank_statement: string;
+    extra_doc: string;
   };
+  const files: Files = {
+    cv: req.files.cv[0].path,
+    bank_statement: req.files.bank_statement[0].path,
+    extra_doc: req.files.extra_doc[0].path,
+  };
+
+  console.log(files);
 
   const {
     name,
@@ -48,9 +57,9 @@ export const usersSignup = async (req: Request, res: Response) => {
 
   try {
     const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ error: "User already exist" });
-    }
+    // if (existingUser) {
+    //   return res.status(400).json({ error: "User already exist" });
+    // }
     const hash = await hashPassword(password);
 
     const user = new User({
@@ -69,12 +78,13 @@ export const usersSignup = async (req: Request, res: Response) => {
       income,
       language,
       phone,
-      cv: cv[0].path,
-      bank_statement: bank_statement[0].path,
-      extra_doc: extra_doc[0].path,
+      files,
+      cv: files.cv,
+      bank_statement: files.bank_statement,
+      extra_doc: files.extra_doc,
     });
-    await user.save();
-    console.log(cv);
+    // await user.save();
+    // console.log(cv);
 
     return res.status(201).json({ message: "User successfully created", user });
   } catch (error) {
