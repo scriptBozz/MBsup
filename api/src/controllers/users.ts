@@ -38,6 +38,12 @@ export const userSignup = async (req: Request, res: Response) => {
     income: req.body.income,
     language: req.body.language,
     phone: req.body.phone,
+<<<<<<< HEAD
+=======
+    cv: req.file,
+    bank_statement: req.file,
+    extra_doc: req.file,
+>>>>>>> 555113aea97653f72854326b120896209f1d6f6e
   });
   //   console.log(files);
   if (!req.body.name) {
