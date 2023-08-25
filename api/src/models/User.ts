@@ -90,13 +90,11 @@ const userSchema = new mongoose.Schema(
       type: String,
       // type: Buffer,
       // contentType: String,
-      default: "same as cv",
     },
     extra_doc: {
       type: String,
       // type: Buffer,
       // contentType: String,
-      default: "same as cv",
     },
     // },
   },

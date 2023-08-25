@@ -1,6 +1,6 @@
 import Router from "express";
 import {
-  usersSignup,
+  userSignup,
   usersSignin,
   usersUpdate,
   allUser,
@@ -34,7 +34,7 @@ const multiple = upload.fields([
 
 const router = Router();
 
-router.post("/signup", multiple, usersSignup);
+router.post("/", userSignup);
 router.post("/signin", usersSignin);
 router.patch("/update/:userId", multiple, usersUpdate);
 router.get("/", allUser);

@@ -3,24 +3,39 @@ import { Paper, TextField, Button } from "@mui/material";
 import axios from "axios";
 
 export default function Signup() {
+  const endpoint = "http://localhost:3001/signup";
+
+  const [userinfo, setUserInfo] = useState({
+    name: "",
+    email: "",
+    password: "",
+    username: "",
+  });
+
+  const [signupRespons, setSignupResponse] = useState("");
   const [regtoggle, setRegtoggle] = useState(true);
   const [regtoggle1, setRegtoggle1] = useState(false);
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  function getName(event: React.ChangeEvent<HTMLInputElement>) {
+    setUserInfo({ ...userinfo, name: event.target.value });
+  }
+  function getEmail(event: React.ChangeEvent<HTMLInputElement>) {
+    setUserInfo({ ...userinfo, email: event.target.value });
+  }
+  function getPassword(event: React.ChangeEvent<HTMLInputElement>) {
+    setUserInfo({ ...userinfo, password: event.target.value });
+  }
+  function getUserName(event: React.ChangeEvent<HTMLInputElement>) {
+    setUserInfo({ ...userinfo, username: event.target.value });
+  }
+  function onclickHandler() {
+    axios
+      .post(endpoint, userinfo)
+      .then((res) => setSignupResponse("success"))
+      .catch((err) => console.log(err));
+  }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    try {
-      e.preventDefault();
-      const { data } = await axios.post(`http://localhost:3001/users/signup`);
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  // console.log(process.env.REACT_APP_BASE_URL);
+  console.log(signupRespons);
 
   return (
     <div
@@ -34,8 +49,8 @@ export default function Signup() {
     >
       {regtoggle && (
         <form
+          onSubmit={(e) => e.preventDefault()}
           className="form_paper"
-          onSubmit={handleSubmit}
           style={{
             display: "flex",
             flexDirection: "column",
@@ -57,43 +72,34 @@ export default function Signup() {
             <TextField
               required
               id="outlined-required"
-              label="Required"
-              defaultValue="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              label="Name"
+              defaultValue=""
+              onChange={getName}
             />
             <TextField
               required
               id="outlined-required"
-              label="Required"
-              defaultValue="User-Name"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              label="Email"
+              defaultValue=""
+              onChange={getEmail}
             />
             <TextField
               required
               id="outlined-required"
-              label="Required"
-              defaultValue="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              label="Password"
+              defaultValue=""
+              onChange={getPassword}
             />
             <TextField
               required
               id="outlined-required"
-              label="Required"
-              defaultValue="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              label="Username"
+              defaultValue=""
+              onChange={getUserName}
             />
-            {/* <TextField
-            required
-            id="outlined-required"
-            label="Required"
-            defaultValue="Password"
-          /> */}
+
             <div>
-              <Button variant="outlined" type="submit">
+              <Button variant="outlined" type="submit" onClick={onclickHandler}>
                 Sign-up
               </Button>
               <Button

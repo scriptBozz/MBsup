@@ -3,90 +3,72 @@ import User from "../models/User";
 import { hashPassword, comparePassword } from "../bcrypt/bcrypt";
 import { v4 as uuidv4 } from "uuid";
 import jwt from "jsonwebtoken";
+import Multer from "multer";
 
-export const usersSignup = async (req: Request, res: Response) => {
+import createUserService from "../services/users";
+export const userSignup = async (req: Request, res: Response) => {
   //   const { cv, bank_statement, extra_doc } = req.files as {
   //     cv: Express.Multer.File[];
   //     bank_statement: Express.Multer.File[];
   //     extra_doc: Express.Multer.File[];
   //   };
 
-  type Files = {
-    cv: string;
-    bank_statement: string;
-    extra_doc: string;
-  };
-  const files: Files = {
-    cv: req.files.cv[0].path,
-    bank_statement: req.files.bank_statement[0].path,
-    extra_doc: req.files.extra_doc[0].path,
-  };
+  // type Files = {
+  //   cv: string;
+  //   bank_statement: string;
+  //   extra_doc: string;
+  // };
+  // const files: Files = {
+  //   cv: req.files.cv[0].path,
+  //   bank_statement: req.files.bank_statement[0].path,
+  //   extra_doc: req.files.extra_doc[0].path,
+  // };
 
-  console.log(files);
+  // console.log(files);
 
-  const {
-    name,
-    email,
-    password,
-    username,
-    status,
-    apartments,
-    subscription_status,
-    subscriptionId,
-    country,
-    current_address,
-    education,
-    occupation,
-    income,
-    language,
-    phone,
-  } = req.body;
+  const userinfo = new User({
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password,
+    username: req.body.username,
+    status: req.body.status,
+    apartments: req.body.apartments,
+    subscription_status: req.body.subscription_status,
+    subscriptionId: req.body.subscription_id,
+    country: req.body.country,
+    current_address: req.body.current_address,
+    education: req.body.education,
+    occupation: req.body.occupation,
+    income: req.body.income,
+    language: req.body.language,
+    phone: req.body.phone,
+    cv: req.body.cv,
+    bank_statement: req.body.bank_statement,
+    extra_doc: req.body.extra_doc,
+  });
   //   console.log(files);
-  if (!name) {
+  if (!req.body.name) {
     return res.status(400).json({ error: "Name is required" });
   }
-  if (!email) {
+  if (!req.body.email) {
     return res.status(400).json({ error: "Email is required" });
   }
-  if (!password) {
+  if (!req.body.password) {
     return res.status(400).json({ error: "Password is required" });
   }
-  if (!username) {
+  if (!req.body.username) {
     return res.status(400).json({ error: "Username is required" });
   }
 
   try {
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email: req.body.email });
     // if (existingUser) {
     //   return res.status(400).json({ error: "User already exist" });
     // }
-    const hash = await hashPassword(password);
+    const hash = await hashPassword(req.body.password);
 
-    const user = new User({
-      name,
-      email,
-      password: hash,
-      username,
-      status,
-      apartments,
-      subscription_status,
-      subscriptionId: uuidv4(),
-      country,
-      current_address,
-      education,
-      occupation,
-      income,
-      language,
-      phone,
-      files,
-      cv: files.cv,
-      bank_statement: files.bank_statement,
-      extra_doc: files.extra_doc,
-    });
-    // await user.save();
-    // console.log(cv);
-
-    return res.status(201).json({ message: "User successfully created", user });
+    const user = await createUserService(userinfo);
+    return res.status(200).json({ message: "User created" });
   } catch (error) {
     console.log(error);
   }
