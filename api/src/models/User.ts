@@ -88,11 +88,13 @@ const userSchema = new mongoose.Schema(
     },
     bank_statement: {
       type: String,
+      default: "bank_statement",
       // type: Buffer,
       // contentType: String,
     },
     extra_doc: {
       type: String,
+      default: "extra_doc",
       // type: Buffer,
       // contentType: String,
     },

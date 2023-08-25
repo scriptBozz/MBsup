@@ -3,7 +3,7 @@ import { Paper, TextField, Button } from "@mui/material";
 import axios from "axios";
 
 export default function Signup() {
-  const endpoint = "http://localhost:3001/signup";
+  const endpoint = "http://localhost:3001/users";
 
   const [userinfo, setUserInfo] = useState({
     name: "",
@@ -30,8 +30,15 @@ export default function Signup() {
   }
   function onclickHandler() {
     axios
-      .post(endpoint, userinfo)
-      .then((res) => setSignupResponse("success"))
+      .post(`${endpoint}/signup`, userinfo)
+      .then((res) => setSignupResponse("Sign up success"))
+      .catch((err) => console.log(err));
+  }
+
+  function onclickSinginHandler() {
+    axios
+      .post(`${endpoint}/signin`, userinfo)
+      .then((res) => setSignupResponse("Sign in success"))
       .catch((err) => console.log(err));
   }
 
@@ -139,7 +146,9 @@ export default function Signup() {
             defaultValue="Password"
           />
           <div>
-            <Button variant="outlined">Login</Button>
+            <Button variant="outlined" onClick={onclickSinginHandler}>
+              Login
+            </Button>
           </div>
           <Button
             onClick={() => {
