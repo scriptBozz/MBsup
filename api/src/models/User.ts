@@ -69,7 +69,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       // type: Buffer,
       // contentType: String,
-      default: "uploadable file",
+    
     },
     education: {
       type: String,
