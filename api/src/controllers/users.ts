@@ -42,9 +42,9 @@ export const userSignup = async (req: Request, res: Response) => {
     income: req.body.income,
     language: req.body.language,
     phone: req.body.phone,
-    cv: req.body.cv,
-    bank_statement: req.body.bank_statement,
-    extra_doc: req.body.extra_doc,
+    cv: req.file,
+    bank_statement: req.file,
+    extra_doc: req.file,
   });
   //   console.log(files);
   if (!req.body.name) {
